@@ -1,0 +1,165 @@
+FORMAT: 1A
+HOST: http://gmapi.azurewebsites.net/
+
+# GM API
+
+Generic Motors (GM) API is a simple API to interact with GM vehicles.
+
+## Vehicle Information [/getVehicleInfoService]
+
+### Get Vehicle Info [POST]
+
++ Request (application/json)
+
+        {
+          "id": "1234",
+          "responseType": "JSON"
+        }
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+          "service": "getVehicleInfo",
+          "status": "200",
+          "data": {
+            "vin": {
+              "type": "String",
+              "value": "123123412412"
+            },
+            "color": {
+              "type": "String",
+              "value": "Metallic Silver"
+            },
+            "fourDoorSedan": {
+              "type": "Boolean",
+              "value": "True"
+            },
+            "twoDoorCoupe": {
+              "type": "Boolean",
+              "value": "False"
+            },
+            "driveTrain": {
+              "type": "String",
+              "value": "v8"
+            }
+          }
+        }
+
+## Security [/getSecurityStatusService]
+
+### Get Security Status [POST]
+
++ Request (application/json)
+
+        {
+          "id": "1234",
+          "responseType": "JSON"
+        }
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+          "service": "getSecurityStatus",
+          "status": "200",
+          "data": {
+            "doors": {
+              "type": "Array",
+              "values": [
+                {
+                  "location": {
+                    "type": "String",
+                    "value": "frontLeft"
+                  },
+                  "locked": {
+                    "type": "Boolean",
+                    "value": "False"
+                  }
+                },
+                {
+                  "location": {
+                    "type": "String",
+                    "value": "frontRight"
+                  },
+                  "locked": {
+                    "type": "Boolean",
+                    "value": "True"
+                  }
+                }
+              ]
+            }
+          }
+        }
+
+## Energy [/getEnergyService]
+
+### Get Fuel/Battery Level [POST]
+
++ Request (application/json)
+
+        {
+          "id": "1234",
+          "responseType": "JSON"
+        }
+        
++ Response 200 (application/json; charset=utf-8)
+        
+        {
+          "service": "getEnergyService",
+          "status": "200",
+          "data": {
+            "tankLevel": {
+              "type": "Number",
+              "value": "30"
+            },
+            "batteryLevel": {
+              "type": "Null",
+              "value": "null"
+            }
+          }
+        }
+
+## Engine [/actionEngineService]
+
+### Start Engine [POST]
+
++ Request (application/json)
+
+        {
+          "id": "1234",
+          "command": "START_VEHICLE",
+          "responseType": "JSON"
+        }
+        
++ Response 200 (application/json; charset=utf-8)
+        
+        {
+          "service": "actionEngine",
+          "status": "200",
+          "actionResult": {
+            "status": "EXECUTED"
+          }
+        }
+
++ Response 400
+
+### Stop Engine [POST]
+
++ Request (application/json)
+
+        {
+          "id": "1234",
+          "command": "STOP_VEHICLE",
+          "responseType": "JSON"
+        }
+        
++ Response 200 (application/json; charset=utf-8)
+        
+        {
+          "service": "actionEngine",
+          "status": "200",
+          "actionResult": {
+            "status": "EXECUTED"
+          }
+        }
+
++ Response 400
