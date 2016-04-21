@@ -210,7 +210,7 @@ app.get(securityEndPoint, (req, res) => {
         }
         else {
             res.status(response.status || 500)
-            .send(response.reason || err);
+            .send(response.reason);
         }
     })
     .catch(err => {
@@ -244,7 +244,7 @@ app.get(fuelEndPoint, (req, res) => {
         }
         else {
             res.status(response.status || 500)
-            .send(response.reason || err);
+            .send(response.reason);
         }
     })
     .catch(err => {
@@ -278,7 +278,7 @@ app.get(batteryEndPoint, (req, res) => {
         }
         else {
             res.status(response.status || 500)
-            .send(response.reason || err);
+            .send(response.reason);
         }
     })
     .catch(err => {
@@ -318,7 +318,7 @@ app.post(engineEndPoint, (req, res) => {
         }
         else {
             res.status(response.status || 500)
-            .send(response.reason || err);
+            .send(response.reason);
         }
     })
     .catch(err => {
@@ -334,7 +334,7 @@ function verifyIntegrity(obj) {
         if (obj.hasOwnProperty(key)) { 
             var value = obj[key];
             console.log(value);
-            if (value == null || value == undefined || value == 'unknown') {
+            if (value === null || value === undefined || value === 'unknown') {
                 console.warn("--- Detected missing data! Verify if there have been changes in the integrated API.", obj);
                 return false;
             }
