@@ -1,0 +1,176 @@
+FORMAT: 1A
+HOST: http://localhost:3000/api/v1.0
+
+# Smartcar API
+
+Smartcar API provides a generic interface for communicating with vehicles of all models.
+
+## Version [/version]
+
+Current API version
+
+### Get Version [GET]
+
++ Response 200 (text/plain; charset=utf-8)
+
+        1.0
+
+## Entry Point [/]
+
+### Get Entry Point [GET]
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+          "name": "smartcar-api",
+          "version": "1.0",
+          "links": {
+            "vehicles": "/vehicles/:id"
+          }
+        }
+
+## All Vehicles [/api/v1.0/vehicles]
+
+### Get All (Cached) Vehicles [GET] 
+
++ Response 200 (application/json; charset=utf-8)
+
+        [
+          {
+            "id": "1234",
+            "vin": "123123412412",
+            "color": "Metallic Silver",
+            "doorCount": 4,
+            "driveTrain": "v8",
+            "links": {
+              "url": "/api/v1.0/vehicles/1234",
+              "security": "/api/v1.0/vehicles/1234/doors",
+              "fuel": "/api/v1.0/vehicles/1234/fuel",
+              "battery": "/api/v1.0/vehicles/1234/battery",
+              "engine": "/api/v1.0/vehicles/1234/engine"
+            }
+          }
+        ]
+
+## Vehicle [/api/v1.0/vehicles/{id}]
+
++ Parameters
+    + id: 1234 (string) - Vehicle ID
+
+### Get Vehicle Info [GET]
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+          "vin": "1213231",
+          "color": "Metallic Silver",
+          "doorCount": 4,
+          "driveTrain": "v8"
+        }
+
++ Response 404
+
++ Response 500
+
+## Security [/api/v1.0/vehicles/{id}/doors]
+
++ Parameters
+    + id: 1234 (string) - Vehicle ID
+
+### Get Security [GET]
+
++ Response 200 (application/json; charset=utf-8)
+
+        [
+          {
+            "location": "frontLeft",
+            "locked": true
+          },
+          {
+            "location": "frontRight",
+            "locked": true
+          }
+        ]
+
++ Response 404
+
++ Response 500
+
+## Fuel Range [/api/v1.0/vehicles/{id}/fuel]
+
++ Parameters
+    + id: 1234 (string) - Vehicle ID
+
+### Get Fuel Range [GET]
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+          "percent": 30
+        }
+
++ Response 404
+
++ Response 500
+
+## Battery Range [/api/v1.0/vehicles/{id}/battery]
+
++ Parameters
+    + id: 1234 (string) - Vehicle ID
+
+### Get Battery Range [GET]
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+          "percent": 50
+        }
+
++ Response 404
+
++ Response 500
+
+## Engine [/api/v1.0/vehicles/{id}/engine]
+
++ Parameters
+    + id: 1234 (string) - Vehicle ID
+
+### Start Engine [POST]
+
++ Request (application/json)
+
+        {
+          "action": "START"
+        }
+        
++ Response 200 (application/json; charset=utf-8)
+
+        {
+          "status": "success|error"
+        }
+
++ Response 400
+
++ Response 404
+
++ Response 500
+
+### Stop Engine [POST]
+
++ Request (application/json)
+
+        {
+          "action": "STOP"
+        }
+        
++ Response 200 (application/json; charset=utf-8)
+
+        {
+          "status": "success|error"
+        }
+
++ Response 400
+
++ Response 404
+
++ Response 500

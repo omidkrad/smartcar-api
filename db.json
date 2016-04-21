@@ -1,0 +1,11 @@
+{
+  "vehicles": [
+    {
+      "id": "1235",
+      "vin": "1235AZ91XP",
+      "color": "Forest Green",
+      "doorCount": 2,
+      "driveTrain": "electric"
+    }
+  ]
+}
